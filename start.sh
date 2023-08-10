@@ -1,10 +1,9 @@
 #!/bin/bash
 
 # run server in production mode with frontend build
-cd backend
-npm install
-echo "ls-6"
-ls
 echo "ls-7"
-ls dist
+ls
+cd backend
+echo "ls-8"
+ls
 npm start
