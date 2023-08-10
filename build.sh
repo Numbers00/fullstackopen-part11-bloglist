@@ -4,4 +4,4 @@
 cd frontend
 npm install
 npm run build
-mv build ../backend/build
+mv dist ../backend/dist
