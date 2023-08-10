@@ -30,6 +30,9 @@ mongoose
 app.use(middleware.requestLogger);
 app.use(middleware.tokenExtractor);
 
+// Serve static files from the 'build' directory
+app.use(express.static('build'));
+
 app.use('/api/blogs', blogsRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/login', loginRouter);
