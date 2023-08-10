@@ -12,3 +12,5 @@ ls
 mv dist ../backend/dist
 echo "ls-4"
 ls
+echo "ls-5"
+ls ../backend
