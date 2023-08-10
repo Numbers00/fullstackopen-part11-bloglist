@@ -31,7 +31,14 @@ app.use(middleware.requestLogger);
 app.use(middleware.tokenExtractor);
 
 // Serve static files from the 'dist' directory
-app.use(express.static('dist'));
+const path = require('path');
+const distPath = path.join(__dirname, 'dist');
+app.use(express.static(distPath));
+
+// Get static files from dist folder
+app.get('*', (req, res) => {
+  res.sendFile(path.join(distPath, 'index.html'));
+});
 
 app.use('/api/blogs', blogsRouter);
 app.use('/api/users', usersRouter);

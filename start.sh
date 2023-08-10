@@ -5,4 +5,6 @@ cd backend
 npm install
 echo "ls-6"
 ls
+echo "ls-7"
+ls dist
 npm start
