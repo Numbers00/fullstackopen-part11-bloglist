@@ -16,5 +16,5 @@ cd ../backend
 npm install
 echo "ls-5"
 ls
-echo "ls-7"
+echo "ls-6"
 ls dist
