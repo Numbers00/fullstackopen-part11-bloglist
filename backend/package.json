@@ -12,6 +12,9 @@
   },
   "author": "Numbers00",
   "license": "ISC",
+  "engines": {
+    "node": ">=16"
+  },
   "dependencies": {
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
