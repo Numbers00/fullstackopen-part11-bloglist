@@ -39,7 +39,7 @@ jobs:
         with:
           browser: chrome
           command: npm run test:e2e
-          start: npm run --prefix ../backend start
+          start: npm run --prefix ../backend start:test
           wait-on: http://localhost:${{ secrets.BACKEND_PORT }}
           working-directory: ./frontend
         env:
