@@ -40,7 +40,8 @@ jobs:
           browser: chrome
           command: npm run test:e2e
           start: npm run --prefix ../backend start
-          wait-on: http://localhost:3003
+          wait-on: http://localhost:${{ secrets.BACKEND_PORT }}
+          config: baseUrl=http://localhost:${{ secrets.BACKEND_PORT }}
           working-directory: ./frontend
         env:
           PORT: ${{ secrets.BACKEND_PORT }}
