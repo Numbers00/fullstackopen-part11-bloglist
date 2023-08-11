@@ -1,0 +1,50 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize]
+
+env:
+  COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+
+jobs:
+  deployment_pipeline:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      
+      - name: Check and set up frontend
+        run: |
+          npm install
+          npm run eslint
+          npm run build:linux
+        working-directory: ./frontend
+
+      - name: Check and set up backend
+        run: |
+          npm install
+          npm run lint
+        working-directory: ./backend
+
+      - name: Run e2e tests
+        uses: cypress-io/github-action@v5
+        with:
+          browser: chrome
+          command: npm run test:e2e
+          start: |
+            cd ../backend
+            npm start
+          wait-on: http://localhost:3003
+          working-directory: ./frontend
+
+      - name: Trigger deployment
+        # if it's a PR that's merged, not just a new PR request
+        if: github.event_name == 'push' && !contains(join(env.COMMIT_MESSAGES, ' '), '#skip')
+        run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
