@@ -42,7 +42,7 @@ jobs:
           wait-on: http://localhost:3003
           working-directory: ./frontend
         env:
-          PORT: ${{ secrets.PORT }}
+          PORT: ${{ secrets.BACKEND_PORT }}
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
           SECRET: ${{ secrets.BACKEND_SECRET }}
 
