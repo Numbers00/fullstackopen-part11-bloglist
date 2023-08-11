@@ -1,4 +1,8 @@
 #!/bin/bash
+echo "node v"
+node -v
+echo "npm v"
+npm -v
 echo "ls-1"
 ls
 # set up frontend build
