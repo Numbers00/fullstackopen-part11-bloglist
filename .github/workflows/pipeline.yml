@@ -25,6 +25,7 @@ jobs:
           npm install
           npm run eslint
           npm run build:linux
+          mv dist ../backend/
         working-directory: ./frontend
 
       - name: Set up and lint backend
@@ -40,7 +41,7 @@ jobs:
           command: npm run test:e2e
           start: npm run --prefix ../backend start
           wait-on: http://localhost:3003
-          wait-on-timeout: 180
+          # wait-on-timeout: 180
           working-directory: ./frontend
         env:
           PORT: ${{ secrets.BACKEND_PORT }}
