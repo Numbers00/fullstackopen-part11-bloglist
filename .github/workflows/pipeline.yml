@@ -41,10 +41,10 @@ jobs:
           start: npm run --prefix ../backend start
           wait-on: http://localhost:3003
           working-directory: ./frontend
-          env: |
-            PORT=${{ secrets.PORT }}
-            MONGODB_URI=${{ secrets.MONGODB_URI }}
-            SECRET=${{ secrets.BACKEND_SECRET }}
+        env:
+          PORT: ${{ secrets.PORT }}
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          SECRET: ${{ secrets.BACKEND_SECRET }}
 
       - name: Trigger deployment to render.com
         # if it's a PR that's merged, not just a new PR request
