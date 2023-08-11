@@ -36,9 +36,9 @@ const distPath = path.join(__dirname, 'dist');
 app.use(express.static(distPath));
 
 // Get static files from dist folder
-app.get('*', (req, res) => {
-  res.sendFile(path.join(distPath, 'index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(distPath, 'index.html'));
+// });
 
 app.use('/api/blogs', blogsRouter);
 app.use('/api/users', usersRouter);
