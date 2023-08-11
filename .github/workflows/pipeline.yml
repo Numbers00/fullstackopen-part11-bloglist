@@ -37,9 +37,10 @@ jobs:
         uses: cypress-io/github-action@v5
         with:
           browser: chrome
-          command: npm run --prefix frontend test:e2e
-          start: npm run --prefix backend start
+          command: npm run test:e2e
+          start: npm run --prefix ../backend start
           wait-on: http://localhost:3003
+          working-directory: ./frontend
 
       - name: Trigger deployment to render.com
         # if it's a PR that's merged, not just a new PR request
