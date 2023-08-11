@@ -21,29 +21,29 @@ mongoose
   .connect(config.MONGODB_URI)
   .then(() => {
     logger.info('connected to MongoDB');
-
-    app.use(middleware.requestLogger);
-    app.use(middleware.tokenExtractor);
-
-    // Serve static files from the 'dist' directory
-    const path = require('path');
-    const distPath = path.join(__dirname, 'dist');
-    app.use(express.static(distPath));
-
-    app.use('/api/blogs', blogsRouter);
-    app.use('/api/users', usersRouter);
-    app.use('/api/login', loginRouter);
-
-    if (process.env.NODE_ENV === 'test') {
-      const testingRouter = require('./controllers/testing');
-      app.use('/api/testing', testingRouter);
-    }
-
-    app.use(middleware.unknownEndpoint);
-    app.use(middleware.errorHandler);
   })
   .catch((error) => {
     logger.error('error connecting to MongoDB:', error.message);
   });
+
+app.use(middleware.requestLogger);
+app.use(middleware.tokenExtractor);
+
+// Serve static files from the 'dist' directory
+const path = require('path');
+const distPath = path.join(__dirname, 'dist');
+app.use(express.static(distPath));
+
+app.use('/api/blogs', blogsRouter);
+app.use('/api/users', usersRouter);
+app.use('/api/login', loginRouter);
+
+if (process.env.NODE_ENV === 'test') {
+  const testingRouter = require('./controllers/testing');
+  app.use('/api/testing', testingRouter);
+}
+
+app.use(middleware.unknownEndpoint);
+app.use(middleware.errorHandler);
 
 module.exports = app;

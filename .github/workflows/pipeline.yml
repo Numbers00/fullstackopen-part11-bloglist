@@ -44,7 +44,7 @@ jobs:
           working-directory: ./frontend
         env:
           PORT: ${{ secrets.BACKEND_PORT }}
-          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
           SECRET: ${{ secrets.BACKEND_SECRET }}
 
       - name: Trigger deployment to render.com
