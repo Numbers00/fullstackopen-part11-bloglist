@@ -41,7 +41,6 @@ jobs:
           command: npm run test:e2e
           start: npm run --prefix ../backend start
           wait-on: http://localhost:3003
-          # wait-on-timeout: 180
           working-directory: ./frontend
         env:
           PORT: ${{ secrets.BACKEND_PORT }}
