@@ -39,7 +39,7 @@ app.get('/health', (_req, res) => {
 });
 
 app.get('/version', (_req, res) => {
-  res.send('2');
+  res.send('3');
 });
 
 app.use('/api/blogs', blogsRouter);
