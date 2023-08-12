@@ -51,3 +51,18 @@ jobs:
         # if it's a PR that's merged, not just a new PR request
         if: github.event_name == 'push' && !contains(join(env.COMMIT_MESSAGES, ' '), '#skip')
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
+
+  tag_release:
+    needs: [deployment_pipeline]
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.merge_commit_sha }}
+          fetch-depth: '0'
+      - name: Bump version and push tag
+        if: github.event_name == 'push' && !contains(join(env.COMMIT_MESSAGES, ' '), '#skip')
+        uses: anothrNick/github-tag-action@93b75ef5a57640183b7e69a77098f41184b2e8ad
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # this secret is automatic
+          DEFAULT_BUMP: patch

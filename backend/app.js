@@ -34,6 +34,14 @@ const path = require('path');
 const distPath = path.join(__dirname, 'dist');
 app.use(express.static(distPath));
 
+app.get('/health', (_req, res) => {
+  res.send('ok');
+});
+
+app.get('/version', (_req, res) => {
+  res.send('1');
+});
+
 app.use('/api/blogs', blogsRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/login', loginRouter);
